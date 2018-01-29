@@ -1,0 +1,35 @@
+
+
+
+ <div class="add-list">
+      <form (submit)="addList($event)">
+      <input [(ngModel)]="newListName" class="textfield" name="newListName">
+        <button class="button-add-list" type="submit">Add list</button>
+      </form>
+ </div>
+
+
+
+<div id="lists" class="list" *ngFor="let list of lists; let i=index">
+	<div>
+		<form ngNativeValidate (submit)="renameList(i, $event)">
+      <input required class="list-textfield" value="{{list.name}}">
+        <button class="button-rename-list"  type="submit">Rename list</button>
+        <button class="button-delete-list"  type="button" (click)="deleteList(i)">Delete list</button>
+      </form>
+	<form ngNativeValidate (submit)="addTask(i, $event)">
+      <input required class="textfield">
+        <input class="button-add-task"  type="submit" value="Add task"/>
+      </form>
+	<ul class="tasks" droppable (onDrop)="onItemDrop(i, $event)" (onDrag)="onItemDrag(i, $event)">
+		<li class="task" draggable *ngFor="let task of list.tasks; let j=index" [dragData]="{listId: i, taskId: j, data:task}">
+		<form ngNativeValidate (submit)="changeTask(i, j, $event)"> <input required="" class="textfield" type="text" value="{{task.description}}">
+		 <input type="checkbox" [attr.checked]="task.isDone == true ? 'true' : null">
+		<button class="button-task" type="submit">Save changes</button>
+		<button class="button-task" (click)="deleteTask(i,j)">Delete</button>
+		</form>
+		
+		</li>
+	</ul>
+	</div>
+</div>
