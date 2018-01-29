@@ -55,6 +55,7 @@ export class ToDoListsComponent implements OnInit {
           this.lists[index].tasks = [];
           this.lists[index].tasks.push(res);	
     	}
+      $event.target[0].value = '';
   	});
   }
 
