@@ -1,1 +1,8 @@
-
+		<li class="task" draggable *ngFor="let task of list.tasks; let j=index" [dragData]="{listId: i, taskId: j, data:task}">
+		<form ngNativeValidate (submit)="changeTask(i, j, $event)"> <input required="" class="textfield" type="text" value="{{task.description}}">
+		 <input type="checkbox" [attr.checked]="task.isDone == true ? 'true' : null">
+		<button class="button-task" type="submit">Save changes</button>
+		<button class="button-task" (click)="deleteTask(i,j)">Delete</button>
+		</form>
+		
+		</li>
