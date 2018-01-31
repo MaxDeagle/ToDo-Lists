@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Input, Component} from '@angular/core';
 
 import { Task } from '../task';
 import { ToDoService } from '../todo.service';
@@ -9,4 +9,5 @@ import { ToDoService } from '../todo.service';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent {
+  @Input() task: Task;
 }
