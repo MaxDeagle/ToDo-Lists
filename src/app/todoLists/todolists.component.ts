@@ -5,7 +5,7 @@ import { Task } from '../task';
 import { ToDoService } from '../todo.service';
 
 @Component({
-  selector: 'app-todolists',
+  selector: 'lists-component',
   templateUrl: './todolists.component.html',
   styleUrls: ['./todolists.component.css']
 })
