@@ -3,6 +3,8 @@
   <h1>
     Welcome to {{ title }} resource!
   </h1>
-  <app-todolists></app-todolists>
+
+
+  <list-component *ngFor="let list of lists" [list]="list"></list-component>
 
 </div>

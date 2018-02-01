@@ -5,14 +5,16 @@ import { HttpClientModule }    from '@angular/common/http';
 import { NgDragDropModule } from 'ng-drag-drop';
 
 import { AppComponent } from './app.component';
-import { ToDoListsComponent } from './todoLists/todolists.component';
-import { ToDoService } from './todo.service';
+import { ListComponent } from './list/list.component';
+import { AppService } from './services/app.service';
+import { TaskComponent } from './task/task.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToDoListsComponent
+    ListComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +22,7 @@ import { ToDoService } from './todo.service';
     HttpClientModule,
     NgDragDropModule.forRoot()
   ],
-  providers: [ToDoService],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

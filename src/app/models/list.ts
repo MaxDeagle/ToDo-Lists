@@ -1,6 +1,6 @@
 import { Task } from './task';
 
-export class ToDoList {
+export class List {
 	id: number;
 	name: string;
 	tasks: Task[];
