@@ -12,22 +12,11 @@ module.exports = function(app, db) {
       }
       }]).toArray(function(err, items) {
       if (err) {
-        res.send({ 'error': 'An error has occurred' });
+        res.send({ success: false });
       } else {
-        res.send(items);
+        res.send({success: true, data: items});
       }
       });
-
-    /*db.collection('lists').find().toArray(function(err, items) {
-      if (err) {
-        res.send({ 'error': 'An error has occurred' });
-      } else {
-        res.send(lists);
-      }
-    });*/
-
-
-
 
 
   });
@@ -36,10 +25,9 @@ module.exports = function(app, db) {
     const list = { name: req.body.name };
     db.collection('lists').insert(list, (err, result) => {
       if (err) { 
-        res.send({ 'error': 'An error has occurred' }); 
+        res.send({ success: false }); 
       } else {
-        console.log(req.body);
-        res.send(result.ops[0]);
+        res.send({success: true, data: result.ops[0]});
       }
     });
   });
@@ -49,9 +37,9 @@ module.exports = function(app, db) {
     const details = { '_id': new ObjectID(id) };
     db.collection('lists').remove(details, (err, item) => {
       if (err) {
-        res.send({'error':'An error has occurred'});
+        res.send({ success: false });
       } else {
-        res.send(item);
+        res.send({success: true, data: item});
       } 
     });
   });
@@ -62,9 +50,9 @@ module.exports = function(app, db) {
     const list = { name: req.body.name };
     db.collection('lists').update(details, list, (err, result) => {
       if (err) {
-          res.send({'error':'An error has occurred'});
+          res.send({ success: false });
       } else {
-          res.send(list);
+          res.send({success: true, data: list});
       } 
     });
   });

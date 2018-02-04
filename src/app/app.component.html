@@ -4,6 +4,12 @@
     Welcome to {{ title }} resource!
   </h1>
 
+ <div class="add-list">
+      <form (submit)="addList()">
+      <input [(ngModel)]="newList" class="textfield" name="newListName">
+        <button class="button-add-list" type="submit">Add list</button>
+      </form>
+ </div>
 
   <list-component *ngFor="let list of lists" [list]="list"></list-component>
 

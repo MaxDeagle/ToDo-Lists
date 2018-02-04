@@ -6,8 +6,10 @@ import { NgDragDropModule } from 'ng-drag-drop';
 
 import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
-import { AppService } from './services/app.service';
 import { TaskComponent } from './task/task.component';
+
+import { AppService } from './services/app.service';
+import { ListService } from './services/list.service';
 
 
 @NgModule({
@@ -22,7 +24,10 @@ import { TaskComponent } from './task/task.component';
     HttpClientModule,
     NgDragDropModule.forRoot()
   ],
-  providers: [AppService],
+  providers: [
+  AppService, 
+  ListService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

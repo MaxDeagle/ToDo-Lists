@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { List } from './models/list';
 import { Task } from './models/task';
 import { AppService } from './services/app.service';
+import { ListService } from './services/list.service';
+
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +14,34 @@ import { AppService } from './services/app.service';
 })
 export class AppComponent implements OnInit {
   lists: List[];
+  subscription: any;
+  newList: string = '';
 
-  constructor(private todoService: AppService) { }
+  constructor(
+    private appService: AppService,
+    private listService: ListService
+    ) {
+        this.subscription = this.appService.dataChange.asObservable();
+
+        this.subscription
+        .pipe(filter(response => response.type == 0))
+        .subscribe(response => this.lists = response.data);
+
+        this.subscription
+        .pipe(filter(response => response.type == 1))
+        .subscribe(response => this.lists.push(response.data));
+      }
 
   ngOnInit() {
   	this.getLists();
   }
 
   getLists(): void {
-    this.todoService.getLists()
-    .subscribe(lists => {
-     this.lists = lists;
-    });
+    this.listService.getLists();
+  }
 
+  addList(): void {
+    console.log(this.newList);
+    this.listService.addList(this.newList);
   }
 }
