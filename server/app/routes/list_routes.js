@@ -39,7 +39,7 @@ module.exports = function(app, db) {
       if (err) {
         res.send({ success: false });
       } else {
-        res.send({success: true, data: item});
+        res.send({success: true, data: details});
       } 
     });
   });
@@ -52,6 +52,7 @@ module.exports = function(app, db) {
       if (err) {
           res.send({ success: false });
       } else {
+          Object.assign(list, details);
           res.send({success: true, data: list});
       } 
     });

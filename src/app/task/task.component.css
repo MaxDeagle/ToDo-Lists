@@ -1,1 +1,24 @@
+.task {
+	margin: 2px;
+	padding: 2px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
 
+.drag {
+	min-height: 20px;
+	min-width: 20px;
+	background-color: #d6a011;
+	border: 0px;
+	border-radius: 10px;
+}
+
+button {
+	padding: 15px;
+	border: 0px solid;
+	background-color: #d2e23c;
+	color: #000000;
+	border-radius: 20px;
+}

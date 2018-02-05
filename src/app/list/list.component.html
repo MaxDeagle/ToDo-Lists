@@ -1,20 +1,9 @@
-
-
-	<div>
-		<form ngNativeValidate (submit)="renameList(i, $event)">
-      <input required class="list-textfield" value="{{list.name}}">
-        <button class="button-rename-list"  type="submit">Rename list</button>
-        <button class="button-delete-list"  type="button" (click)="deleteList(i)">Delete list</button>
-      </form>
-	<form ngNativeValidate (submit)="addTask(i, $event)">
-      <input required class="textfield">
-        <input class="button-add-task"  type="submit" value="Add task"/>
-      </form>
-
-	</div>
-
-
-	
-	<div class="tasks">
+<div class="list-container">
+	<span>{{list.name}}</span>
+	<button (click)="updateList()" type="submit">Rename list</button>
+	<button type="button" (click)="deleteList()">Delete list</button>
+	<button type="button" (click)="addTask()">Add task</button>
+</div>
+<div droppable (onDrop)="onItemDrop($event)" class="tasks-container">
 	<task-component *ngFor="let task of list.tasks" [task]="task"></task-component>
-	</div>
+</div>

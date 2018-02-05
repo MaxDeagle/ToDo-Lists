@@ -43,7 +43,7 @@ export class ListService {
   }
   
   deleteList(id): void {
-    this.http.delete(this.deleteListUrl + id, httpOptions)
+    this.http.delete(this.listsurl + '/' + id, httpOptions)
     .toPromise()
     .then(data => {
       Object.assign(data, { type: 2 });
@@ -51,14 +51,14 @@ export class ListService {
     });
   }
   
-    
-  updateList(id, list, newName): void {
+  
+  updateList(list): void {
+    let id = list["_id"];
     delete list["_id"];
-    list.name = newName;
-    this.http.put(this.updateListUrl + id, JSON.stringify(list), httpOptions)
+    this.http.put(this.listsurl + '/' + id, JSON.stringify(list), httpOptions)
     .toPromise()
     .then(data => {
-      Object.assign(data, { type: 5 });
+      Object.assign(data, { type: 3 });
       this.appService.dataChange.next(data);
     });
   }

@@ -20,8 +20,10 @@ export class AppService {
   dataChange: BehaviorSubject<any>;
 
   constructor() { 
-    this.dataChange = new BehaviorSubject({});
+    this.dataChange = new BehaviorSubject({} as any);
   }
+
+
 
 }
 

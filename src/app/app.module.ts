@@ -10,6 +10,7 @@ import { TaskComponent } from './task/task.component';
 
 import { AppService } from './services/app.service';
 import { ListService } from './services/list.service';
+import { TaskService } from './services/task.service';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ListService } from './services/list.service';
   ],
   providers: [
   AppService, 
-  ListService
+  ListService,
+  TaskService
   ],
   bootstrap: [AppComponent]
 })

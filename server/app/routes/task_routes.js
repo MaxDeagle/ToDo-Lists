@@ -29,13 +29,14 @@ module.exports = function(app, db) {
       if (err) {
         res.send({ success: false }); 
       } else {
-        res.send({ success:true, data: item});
+        res.send({ success:true, data: details});
       } 
     });
   });
 
     app.put ('/tasks/:id', (req, res) => {
     const id = req.params.id;
+    console.log(id);
     const details = { '_id': new ObjectID(id) };
     const task = { listId: new ObjectID(req.body.listId), isDone: req.body.isDone, description: req.body.description };
     db.collection('tasks').update(details, task, (err, result) => {

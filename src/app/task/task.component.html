@@ -1,7 +1,8 @@
-
-		<form ngNativeValidate (submit)="changeTask(i, j, $event)"> <input required="" class="textfield" type="text" value="{{task.description}}">
-		 <input type="checkbox" [attr.checked]="task.isDone == true ? 'true' : null">
-		<button class="button-task" type="submit">Save changes</button>
-		<button class="button-task" (click)="deleteTask(i,j)">Delete</button>
-		</form>
+<div class="task">
+	<div [dragData]="task" draggable class="drag"></div>
+	<span style="max-width: 450px;">{{task.description}}</span>
+	<input style="min-width: 15px; min-height: 15px;" type="checkbox" (click)="markTask()" [attr.checked]="task.isDone == true ? 'true' : null">
+	<button (click)="renameTask()">Rename</button>
+	<button (click)="deleteTask()">Delete</button>
+</div>
 
