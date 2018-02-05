@@ -30,6 +30,13 @@ export class AppComponent implements OnInit {
         this.subscription
         .pipe(filter(response => response.type == 1))
         .subscribe(response => this.lists.push(response.data));
+      
+        this.subscription
+        .pipe(filter(response => response.type ==2))
+        .subscrive(response => {
+          let position = response.data.map(function(list) { return list.id; }).indexOf(response.data.id);
+          this.lists.splice(position, 1);
+        });
       }
 
   ngOnInit() {
