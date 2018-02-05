@@ -37,9 +37,57 @@ export class ListService {
   	this.http.post(this.listsurl, list, httpOptions)
   	.toPromise()
   	.then(data => {
-  		Object.assign(data, { type: 1});
+  		Object.assign(data, { type: 1 });
   		this.appService.dataChange.next(data);
   	});
+  }
+  
+  deleteList(id): void {
+    this.http.delete(this.deleteListUrl + id, httpOptions)
+    .toPromise()
+    .then(data => {
+      Object.assign(data, { type: 2 });
+      this.appService.dataChange.next(data);
+    });
+  }
+  
+  addTask(id, text): void {
+    this.http.post(this.addTaskUrl, {listId: id, isDone: false, description: text})
+    .toPromise()
+    .then(data => {
+      Object.assign(data, { type: 3 });
+      this.appService.dataChange.next(data);
+    });
+  }
+  
+  deleteTask(id): void {
+    this.http.delete(this.deleteTaskUrl + id, httpOptions)
+    .toPromise()
+    .then(data => {
+      Object.assign(data, { type: 4 });
+      this.appService.dataChange.next(data);
+    });
+  }
+  
+  updateList(id, list, newName): void {
+    delete list["_id"];
+    list.name = newName;
+    this.http.put(this.updateListUrl + id, JSON.stringify(list), httpOptions)
+    .toPromise()
+    .then(data => {
+      Object.assign(data, { type: 5 });
+      this.appService.dataChange.next(data);
+    });
+  }
+  
+  updateTask(id, task): void {
+    delete task["_id"];
+    this.http.put(this.updateTaskUrl + id, JSON.stringify(task), httpOptions)
+    .toPromise()
+    .then(data => {
+      Object.assign(data, { type: 6 });
+      this.appService.dataChange.next(data);
+    });
   }
 
 }
