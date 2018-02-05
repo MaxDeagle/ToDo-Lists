@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 
 import { List } from '../models/list';
 import { Task } from '../models/task';
-import { AppService } from '../services/app.service';
+import { ListService } from '../services/list.service';
 
 @Component({
   selector: 'list-component',
@@ -12,4 +12,12 @@ import { AppService } from '../services/app.service';
 })
 export class ListComponent {
 	@Input() list: List;
+  
+  constructor(
+    private listService: ListService
+    ) { }
+  
+  deleteList(): void {
+    this.listService.deleteList(this.list["_id"]);
+  }
 }
