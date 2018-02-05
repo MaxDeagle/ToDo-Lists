@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
         this.subscription
         .pipe(filter(response => response.type ==2))
         .subscrive(response => {
-          let position = response.data.map(function(list) { return list.id; }).indexOf(response.data.id);
+          let position = response.data.map(function(list) { return list._id; }).indexOf(response.data._id);
           this.lists.splice(position, 1);
         });
       }
