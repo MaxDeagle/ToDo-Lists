@@ -51,24 +51,7 @@ export class ListService {
     });
   }
   
-  addTask(id, text): void {
-    this.http.post(this.addTaskUrl, {listId: id, isDone: false, description: text})
-    .toPromise()
-    .then(data => {
-      Object.assign(data, { type: 3 });
-      this.appService.dataChange.next(data);
-    });
-  }
-  
-  deleteTask(id): void {
-    this.http.delete(this.deleteTaskUrl + id, httpOptions)
-    .toPromise()
-    .then(data => {
-      Object.assign(data, { type: 4 });
-      this.appService.dataChange.next(data);
-    });
-  }
-  
+    
   updateList(id, list, newName): void {
     delete list["_id"];
     list.name = newName;
@@ -79,15 +62,4 @@ export class ListService {
       this.appService.dataChange.next(data);
     });
   }
-  
-  updateTask(id, task): void {
-    delete task["_id"];
-    this.http.put(this.updateTaskUrl + id, JSON.stringify(task), httpOptions)
-    .toPromise()
-    .then(data => {
-      Object.assign(data, { type: 6 });
-      this.appService.dataChange.next(data);
-    });
-  }
-
 }
