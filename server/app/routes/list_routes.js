@@ -38,7 +38,7 @@ module.exports = function(app, db) {
     db.collection('lists').remove(details, (err, item) => {
       if (err) {
         res.send({ success: false });
-      } else {
+      } else { 
         res.send({success: true, data: details});
       } 
     });

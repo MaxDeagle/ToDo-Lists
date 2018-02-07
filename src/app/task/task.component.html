@@ -1,8 +1,8 @@
 <div class="task">
 	<div [dragData]="task" draggable class="drag"></div>
-	<span style="max-width: 450px;">{{task.description}}</span>
+	<span style="max-width: 450px; flex: 1;">{{task.description}}</span>
 	<input style="min-width: 15px; min-height: 15px;" type="checkbox" (click)="markTask()" [attr.checked]="task.isDone == true ? 'true' : null">
-	<button (click)="renameTask()">Rename</button>
+	<button (click)="renameTask()">Change</button>
 	<button (click)="deleteTask()">Delete</button>
 </div>
 

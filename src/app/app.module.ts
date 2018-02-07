@@ -9,8 +9,7 @@ import { ListComponent } from './list/list.component';
 import { TaskComponent } from './task/task.component';
 
 import { AppService } from './services/app.service';
-import { ListService } from './services/list.service';
-import { TaskService } from './services/task.service';
+import { ApiService } from './services/api.service';
 
 
 @NgModule({
@@ -26,9 +25,8 @@ import { TaskService } from './services/task.service';
     NgDragDropModule.forRoot()
   ],
   providers: [
-  AppService, 
-  ListService,
-  TaskService
+  AppService,
+  ApiService
   ],
   bootstrap: [AppComponent]
 })

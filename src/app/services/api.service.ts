@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { catchError, map, tap, filter, flatMap } from 'rxjs/operators';
 
 
 const httpOptions = {
@@ -7,57 +9,47 @@ const httpOptions = {
 };
 
 @Injectable()
-export class AppService {
+export class ApiService {
 
   constructor(private http: HttpClient) { 
   }
 
-  get(url): any {
-    this.http.get(url, httpOptions)
-    .toPromise()
-    .then(response => {
-      if (response.success == false) {
-        alert('error!');
-        return null;
-      }
-      return response.data;
-    });
+  get(url): Observable<any> {
+    return this.http.get(url, httpOptions)
+      .pipe(map(response => {
+          return this.handleResponse(response);
+      }));
+
   }
   
-  post(url, body): any {
-    this.http.post(url, body, httpOptions)
-    .toPromise()
-    .then(response => {
-      if (respose.success == false {
-        alert('error!');
-        return null;
-      }
-      return response.data;
-    });
+  post(url, body): Observable<any> {
+    return this.http.post(url, body, httpOptions)
+      .pipe(map(response => {
+        return this.handleResponse(response);
+      }));
   }
 
-  put(url, body): any {
-    this.http.put(url, body, httpOptions)
-    .toPromise()
-    .then(response => {
-      if (response.success == false {
-        alert('error!');
-        return null;
-      }
-      return response.data;
-    });
+  put(url, body): Observable<any> {
+    return this.http.put(url, body, httpOptions)
+      .pipe(map(response => {
+        return this.handleResponse(response);
+      }));
   }
 
-  delete(url): any {
-    this.http.delete(url, httpOptions)
-    .toPromise()
-    .then(response => {
-      if (response.success == false {
-        alert('error!');
-        return null;
-      }
-      return response.data;
-    });
+  delete(url): Observable<any> {
+    return this.http.delete(url, httpOptions)
+      .pipe(map(response => {
+        return this.handleResponse(response);
+      }));
+  }
+
+  handleResponse(response): any {
+    if (response.success == false) {
+      alert('Error');
+      return null;
+    } 
+
+    return response.data;
   }
   
 }

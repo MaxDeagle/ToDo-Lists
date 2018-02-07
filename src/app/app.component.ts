@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { List } from './models/list';
 import { Task } from './models/task';
 import { AppService } from './services/app.service';
-import { ListService } from './services/list.service';
 
 import { filter } from 'rxjs/operators';
 
@@ -14,43 +13,25 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
 	lists: List[];
-	subscription: any;
 	newList: string = '';
 
-	constructor(
-		private appService: AppService,
-		private listService: ListService
-		) {
-		this.subscription = this.appService.dataChange.asObservable();
-
-		this.subscription
-		.pipe(filter(response => response["type"] == 0))
-		.subscribe(response => this.lists = response.data);
-
-		this.subscription
-		.pipe(filter(response => response["type"] == 1))
-		.subscribe(response => { this.lists.push(response.data); });
-		
-		this.subscription
-		.pipe(filter(response => response["type"] == 2))
-		.subscribe(response => {
-			let position = this.lists.map(function(list) { return list["_id"]; }).indexOf(response.data["_id"]);
-			this.lists.splice(position, 1);
-		});
-
-
+	constructor(private appService: AppService) {
+	  this.appService.dataChange.asObservable()
+	    .subscribe(lists => {
+	      this.lists = lists;
+	  });
 	}
 
 	ngOnInit() {
-		this.getLists();
+	  this.getLists();
 	}
 
 	getLists(): void {
-		this.listService.getLists();
+	  this.appService.getLists();
 	}
 
 	addList(): void {
-		console.log(this.newList);
-		this.listService.addList(this.newList);
+	  console.log(this.newList);
+	  this.appService.addList(this.newList);
 	}
 }
