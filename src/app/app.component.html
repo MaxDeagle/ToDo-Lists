@@ -5,8 +5,8 @@
 	</h1>
 
 	<div class="add-list">
-		<form (submit)="addList()">
-			<input [(ngModel)]="newList" class="textfield" name="newListName">
+		<form ngNativeValidate (submit)="addList()">
+			<input required [(ngModel)]="newList" class="textfield" name="newListName">
 			<button class="button-add-list" type="submit">Add list</button>
 		</form>
 	</div>

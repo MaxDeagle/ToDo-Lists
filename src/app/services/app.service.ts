@@ -29,6 +29,13 @@ export class AppService {
 
   getLists(): void {
     this.apiService.get(this.LISTS_URL).subscribe( (data: List[]) => {
+      data.map(x => {
+        if (x.tasks)
+          return x;
+
+        x.tasks = [];
+        return x;
+      });
       this.dataChange.next(data);
     });
 
@@ -37,6 +44,7 @@ export class AppService {
   addList(newList): void {
     let list = { name: newList }; 
     this.apiService.post(this.LISTS_URL, list).subscribe( (data: List) => {
+      data.tasks = [];
       this.dataChange.next([...this.dataChange.getValue(), data]);
     });
 
